@@ -1,0 +1,72 @@
+@charset "UTF-8";
+.dialog {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  */
+}
+.dialog .dialog-wrapper {
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: all 0.3s linear;
+  -webkit-transition: all 0.3s linear;
+}
+.dialog .dialog-wrapper .dialog-header {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  background: url("../img/loading.gif") no-repeat center;
+  background-size: 40px 40px;
+}
+.dialog .dialog-wrapper .dialog-header.success {
+  background: url("../img/success.png") no-repeat center;
+  background-size: 40px 40px;
+}
+.dialog .dialog-wrapper .dialog-header.loading {
+  background: url("../img/loading.gif") no-repeat center;
+  background-size: 40px 40px;
+}
+.dialog .dialog-wrapper .dialog-header.warning {
+  background: url("../img/warning.png") no-repeat center;
+  background-size: 40px 40px;
+}
+.dialog .dialog-wrapper .dialog-body {
+  text-align: center;
+  color: #ffffff;
+  padding: 10px 0;
+}
+.dialog .dialog-wrapper .dialog-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+}
+.dialog .dialog-wrapper .dialog-footer button {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px 15px;
+  border: none;
+  color: #eee;
+  border-radius: 5px;
+  margin: 0 10px;
+  text-shadow: #666 1px 1px 0;
+}
+.dialog .dialog-wrapper .dialog-footer button.green {
+  background-color: rgba(2, 202, 200, 0.8);
+  color: #FFFFFF;
+}
+.dialog .dialog-wrapper .dialog-footer button.red {
+  background-color: rgba(202, 14, 44, 0.8);
+  color: #FFFFFF;
+}

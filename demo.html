@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <link rel="stylesheet" href="css/dialog.css">
+    <title>移动端Dialog组件</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            height: 100%;
+            width: 100%;
+            font-family: "微软雅黑";
+            font-size: 62.5%;
+        }
+
+        body {
+            margin: 0;
+            font-size: 14px;
+            background-color: #fff;
+            color: #6d6d6d;
+            padding: 0 20px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 20px 0;
+            background-color: green;
+            color: #fff;
+            border: 1px solid #eee;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+<!--<div class="dialog">
+    <div class="dialog-wrapper">
+        <div class="dialog-header loading"></div>
+        &lt;!&ndash;<div class="dialog-body">数据加载中</div>
+        <div class="dialog-footer">
+            <button>default</button>
+            <button class="red">red</button>
+            <button class="green">green</button>
+        </div>&ndash;&gt;
+    </div>
+</div>-->
+
+<button type="button" id="btn1">没有传递参数(需手动关闭)</button>
+<button type="button" id="btn2">弹出一个不带任何按钮，且是警告的框，并且2秒后自动关闭</button>
+<button type="button" id="btn3">弹出一个带有确认和取消的成功框，点击按钮直接关闭</button>
+<button type="button" id="btn4">弹出一个带有确认按钮的警告框，点击按钮不关闭(需手动关闭)</button>
+<button type="button" id="btn5">弹出一个多组的按钮框，且按钮可定制</button>
+<button type="button" id="btn6">弹出一个确认和删除的框，点击确认按钮加载框2秒三自动关闭，点击删除按钮把上一次框关闭</button>
+<button type="button" id="btn7">带动画的弹框</button>
+
+
+<script src="js/zepto_1.1.3.js"></script>
+<script src="js/Dialog.js"></script>
+
+<!--<script>
+    $(function () {
+        // $.dialog();
+        var dialog = new Dialog({
+            type: 'loading',//类型
+            width: '200',// 对话框的宽度
+            maskOpacity: '0.8',//遮罩层的透明度
+            // delay:2000, //延迟时间
+            // delayCallback:function () {  //延迟时间回调函数
+            //    console.log('dialog is close');
+            // },
+            effect: true,
+            maskClose: true,  //点击遮罩层关闭
+            message: 'this is warning', // 文本信息
+            buttons: [
+                {
+                    type: 'red',
+                    text: 'red',
+                    callback: function () {
+                        var dialog = new Dialog()
+                    }
+                },
+                {
+                    type: 'green',
+                    text: 'green',
+                    callback: function () {
+                        console.log('green');
+                    }
+                }
+            ]
+        });
+    });
+</script>-->
+<script>
+    $(function () {
+        $("#btn1").on('click',function () {
+            $.dialog();
+        });
+        $("#btn2").on('click',function () {
+            $.dialog({
+                type:'warning',
+                delay:2000
+            });
+        });
+        $("#btn3").on('click',function () {
+           $.dialog({
+               type:'success',
+               buttons:[
+                   {
+                       text:'取消',
+                       callback:function () {
+                           console.log('点击我关闭了....')
+                       }
+                   },
+                   {
+                       text:'确认',
+                       callback:function () {
+                           console.log('确认....')
+                       }
+                   }
+               ]
+           });
+        });
+        $("#btn4").on('click',function () {
+           $.dialog({
+               type:'warning',
+               buttons:[
+                   {
+                        text:'确认',
+                        callback:function () {
+                            return false;
+                        }
+                   }
+               ]
+           });
+        });
+        $("#btn5").on('click',function () {
+            $.dialog({
+                buttons:[
+                    {
+                        text:'default'
+                    },
+                    {
+                        text:'red',
+                        type:'red'
+                    },
+                    {
+                        text:'green',
+                        type:'green'
+                    }
+                ]
+            });
+        });
+        $('#btn6').on('click',function () {
+            var d=$.dialog({
+                type:'warning',
+                message:'我叫警告框',
+                buttons:[
+                    {
+                        type:'red',
+                        text:'确认',
+                        callback:function(){
+                            $.dialog({
+                                type:'waiting',
+                                delay:2000
+                            });
+                            return false;
+                        }
+                    },
+                    {
+                        type:'green',
+                        text:'删除',
+                        callback:function(){
+                            $.dialog({
+                                type:'warning',
+                                buttons:[
+                                    {
+                                        type:'red',
+                                        text:'删除之前的弹框！',
+                                        callback:function(){
+                                            d.close();
+                                            return false;
+                                        }
+                                    }
+                                ]
+                            });
+                            return false;
+                        }
+                    }
+                ]
+            });
+        });
+        $('#btn7').on('click',function () {
+           $.dialog({
+               type:'loading',
+               effect:true
+           })
+        });
+
+
+    });
+</script>
+</body>
+</html>
